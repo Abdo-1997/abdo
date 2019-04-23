@@ -34,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 import codingwithmitch.com.forsale.models.Post;
 import codingwithmitch.com.forsale.util.RotateBitmap;
@@ -183,41 +184,33 @@ public class postfrag extends Fragment implements dialogSelectPh.OnPhotoSeletedL
     }
 
     private void executeUploadTask(){
+
         Toast.makeText(getActivity(), "uploading image", Toast.LENGTH_SHORT).show();
         final String postId = FirebaseDatabase.getInstance().getReference().push().getKey();
         final StorageReference storageReference = FirebaseStorage.getInstance().getReference()
                 .child("posts/users/" + FirebaseAuth.getInstance().getCurrentUser().getUid() +
                         "/" + postId + "/post_image");
         UploadTask uploadTask = storageReference.putBytes(mUploadBytes);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getActivity(), "Post Success", Toast.LENGTH_SHORT).show();
-                //insert the download url into the firebase database
-              // Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
-                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Got the uri
-                        ImageUpload imageUpload = new ImageUpload(editText5.getText().toString(), uri.toString());
-                        // Wrap with Uri.parse() when retrieving
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return storageReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    String miUrlOk = downloadUri.toString();
 
-                        String uploadId = mDatabaseRef.push().getKey();
-                        mDatabaseRef.child(uploadId).setValue(imageUpload);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
-
-                Log.d(TAG, "onSuccess: firebase download url: " + firebaseUri.toString());
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
 
                 Post post = new Post();
-                post.setImage(firebaseUri.toString());
+                post.setImage(miUrlOk);
                 post.setCity(mCity.getText().toString());
                 post.setContact_email(mContactEmail.getText().toString());
                 post.setCountry(mContactEmail.getText().toString());
@@ -233,23 +226,82 @@ public class postfrag extends Fragment implements dialogSelectPh.OnPhotoSeletedL
                         .setValue(post);
 
                 resetFields();
+
+
+                } else {
+                    Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "could not upload photo", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double currentProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                if( currentProgress > (mProgress + 15)){
-                    mProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                    Log.d(TAG, "onProgress: upload is " + mProgress + "& done");
-                    Toast.makeText(getActivity(), mProgress + "%", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+//        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                Toast.makeText(getActivity(), "Post Success", Toast.LENGTH_SHORT).show();
+//                insert the download url into the firebase database
+//
+//                Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+//                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        // Got the uri
+//                        ImageUpload imageUpload = new ImageUpload(editText5.getText().toString(), uri.toString());
+//                        // Wrap with Uri.parse() when retrieving
+//
+//                        String uploadId = mDatabaseRef.push().getKey();
+//                        mDatabaseRef.child(uploadId).setValue(imageUpload);
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception exception) {
+//                        // Handle any errors
+//                    }
+//                });
+//
+//                Log.d(TAG, "onSuccess: firebase download url: " + firebaseUri.toString());
+//                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+//
+//
+//                Post post = new Post();
+//                post.setImage(firebaseUri.toString());
+//                post.setCity(mCity.getText().toString());
+//                post.setContact_email(mContactEmail.getText().toString());
+//                post.setCountry(mContactEmail.getText().toString());
+//                post.setDescription(mDescription.getText().toString());
+//                post.setPost_id(postId);
+//                post.setPrice(mPrice.getText().toString());
+//                post.setState_province(mStateProvince.getText().toString());
+//                post.setTitle(mTitle.getText().toString());
+//                post.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//
+//                reference.child(getString(R.string.node_post))
+//                        .child(postId)
+//                        .setValue(post);
+//
+//                resetFields();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getActivity(), "could not upload photo", Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                double currentProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                if( currentProgress > (mProgress + 15)){
+//                    mProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                    Log.d(TAG, "onProgress: upload is " + mProgress + "& done");
+//                    Toast.makeText(getActivity(), mProgress + "%", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
     }
     public static byte[] getBytesFromBitmap(Bitmap bitmap, int quality){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
