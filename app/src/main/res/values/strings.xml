@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Fragment Names -->
+
+    <string name="searchfrag">Search</string>
+    <string name="postfrag">Post</string>
+    <string name="watchfrag">Watch List</string>
+    <string name="newpost">new post</string>
+    <string name="account">Account</string>
+    <string name="name">name</string>
+    <string name="price">price</string>
+
+
+    <!-- Dialog Names -->
+
+
+    <!-- Database nodes -->
+    <string name="node_users">users</string>
+    <string name="node_post">post</string>
+
+
+    <!-- Database field names -->
+
+
+
+    <!-- Shared Preferenes -->
+    <string name="preference_country">preference_country</string>
+    <string name="preference_state_province">preference_state_province</string>
+    <string name="preference_city">preference_city</string>
+
+    <string name="lorem_ipsum">As mentioned, the full version of Internet Download Manager comes with a whole host of features that set it apart from the competition. Here is a list of some of the key features that you will get the most use out of, and that will benefit you greatly:
+Download Safety: With IDM, you get to download files without worrying about the safety of your PC. Many people are constantly downloading things that are full of viruses, malware, and nasty trojans. These get into computer systems and can break your PR. Here, the software is built to prevent any dangerous things from being downloaded, keeping you nice and safe.
+Advanced Error Recovery: If something happens while downloading a file -say a break in your connection or just a random error – then IDM has advanced error recovery techniques to ensure the file isn’t lost or broken. It can easily be recovered and then downloaded again.
+Download Resume Feature: Download files whenever you please and then pause them if you have to turn off your PC or need to save data. Then, with the download resume feature, you can pick up the download from where you left it!
+Increase Download Speed: You won’t find another download manager that can increase your download speeds like IDM. Expect to see improvements up to a massive 500%, meaning you can download files in a fraction of the time. This is because it has a revolutionary logic accelerator that includes intelligent dynamic file segmentation. It can break down files into easily downloadable chunks, then put them back together again. This makes it easier for your PC to handle large file downloads, and it gets the job done quicker as well.
+Download Direct From Browsers: No matter what browser you are using, IDM serial key allows you to download files at just the press of a button. You no longer have to open up any new windows, just click on download links and the download will happen. Again, this saves a lot of time, making downloading far more convenient.
+Download Videos: Have you ever seen a video on YouTube that you really liked and wanted to download? Well, now you can do this instantly thanks to the full version of IDM. It has a feature that lets you grab videos from sites like YouTube, and download them in high definition.
+Offline Installation: You don’t need to have an internet connection to install IDM. As long as you’ve downloaded the application from our site, you can switch off your internet and install it.
+User-Friendly Interface: Last but not least, IDM can boast a very user-friendly interface. Lots of download managers are guilty of overcomplicating things and making it hard to navigate around the program. With the Internet Download Manager, you never have this issue as everything is beautiful and clearly laid out and easy for you to use.
+How do you download install IDM for free?
+There are only two things you need to get your hands on to download and install IDM full version for free: a download link, and an IDM serial key. Luckily, we have both of these on this page, so click on any of the download links to start the process.
+From here, you will start downloading the application, and you can open it up on your PC. Follow the on-screen instructions and install the .exe file in the download folder. This will start the installation process for you.
+Again, follow any on-screen instructions and wait for the installation to finish. Now, you will be shown a screen that tells you to provide a serial key. Normally, you have to pay to get an IDM serial key, but we know that not everyone can afford this. As such, try using any of the serial keys listed be</string>
+
+    <string name="app_name">midApp</string>
+    <string name="dia_pho">dialog select photo</string>
+</resources>

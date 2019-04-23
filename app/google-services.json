@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1098274255779",
+    "firebase_url": "https://mygraduationapp-da039.firebaseio.com",
+    "project_id": "mygraduationapp-da039",
+    "storage_bucket": "mygraduationapp-da039.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098274255779:android:59353c8d9b7e2b23",
+        "android_client_info": {
+          "package_name": "codingwithmitch.com.forsale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098274255779-j634j86ltodm9fg1cio8nc76s2658859.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQaWtCJZUkRhwzmKaofFqnZH47_kOW_uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098274255779-j634j86ltodm9fg1cio8nc76s2658859.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
