@@ -30,6 +30,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="codingwithmitch.com.forsale.ViewPostActivity"
+            android:label="@string/title_activity_view_post"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="codingwithmitch.com.forsale.account.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

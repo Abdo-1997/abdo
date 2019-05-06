@@ -1,6 +1,7 @@
 package codingwithmitch.com.forsale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -48,7 +49,7 @@ public class MyAdpter extends RecyclerView.Adapter<MyAdpter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -65,7 +66,18 @@ public class MyAdpter extends RecyclerView.Adapter<MyAdpter.MyViewHolder> {
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context,ViewPostActivity.class);
+                intent.putExtra("postId",mPosts.get(position).getPost_id());
+                context.startActivity(intent);
+            }
+        });
 
+        holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ViewPostActivity.class);
+                intent.putExtra("postId",mPosts.get(position).getPost_id());
+                context.startActivity(intent);
             }
         });
 
@@ -88,16 +100,8 @@ public class MyAdpter extends RecyclerView.Adapter<MyAdpter.MyViewHolder> {
             name = (TextView) itemView.findViewById(R.id.name);
             email = (TextView) itemView.findViewById(R.id.email);
             image = (ImageView) itemView.findViewById(R.id.pic);
-            //  btn = (Button) itemView.findViewById(R.id.checkDetails);
+            btn = (Button) itemView.findViewById(R.id.checkDetails);
         }
-        public void onClick(final int position)
-        {
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, position+" is clicked", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+
     }
 }

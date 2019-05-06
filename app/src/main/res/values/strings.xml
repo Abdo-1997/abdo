@@ -47,4 +47,5 @@ Again, follow any on-screen instructions and wait for the installation to finish
 
     <string name="app_name">midApp</string>
     <string name="dia_pho">dialog select photo</string>
+    <string name="title_activity_view_post">ViewPostActivity</string>
 </resources>
