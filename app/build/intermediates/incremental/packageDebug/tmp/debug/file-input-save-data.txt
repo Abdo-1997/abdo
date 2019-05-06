@@ -1,15 +1,15 @@
 #Internal package file, do not edit.
-#Wed Apr 24 00:25:53 EET 2019
-1.base=F\:\\fci\\code\\abdo\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
-2.path=money_icon.png
+#Mon May 06 01:27:33 EET 2019
+1.base=E\:\\final\\abdo\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+2.path=classes.dex
 0.baseType=DIRECTORY
-2.base=F\:\\fci\\code\\abdo\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
-2.set=ASSET
+2.base=E\:\\final\\abdo\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+2.set=DEX
 1.baseType=DIRECTORY
 count=3
 1.set=ASSET
-0.path=classes.dex
-0.set=DEX
-0.base=F\:\\fci\\code\\abdo\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+0.path=money_icon.png
+0.set=ASSET
+0.base=E\:\\final\\abdo\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
 2.baseType=DIRECTORY
 1.path=money_icon.jpg

@@ -221,7 +221,7 @@ public class postfrag extends Fragment implements dialogSelectPh.OnPhotoSeletedL
                 post.setTitle(mTitle.getText().toString());
                 post.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                reference.child(getString(R.string.node_post))
+                reference.child(getString(R.string.node_posts))
                         .child(postId)
                         .setValue(post);
 
@@ -239,69 +239,7 @@ public class postfrag extends Fragment implements dialogSelectPh.OnPhotoSeletedL
             }
         });
 
-//        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Toast.makeText(getActivity(), "Post Success", Toast.LENGTH_SHORT).show();
-//                insert the download url into the firebase database
-//
-//                Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
-//                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        // Got the uri
-//                        ImageUpload imageUpload = new ImageUpload(editText5.getText().toString(), uri.toString());
-//                        // Wrap with Uri.parse() when retrieving
-//
-//                        String uploadId = mDatabaseRef.push().getKey();
-//                        mDatabaseRef.child(uploadId).setValue(imageUpload);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception exception) {
-//                        // Handle any errors
-//                    }
-//                });
-//
-//                Log.d(TAG, "onSuccess: firebase download url: " + firebaseUri.toString());
-//                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//
-//
-//                Post post = new Post();
-//                post.setImage(firebaseUri.toString());
-//                post.setCity(mCity.getText().toString());
-//                post.setContact_email(mContactEmail.getText().toString());
-//                post.setCountry(mContactEmail.getText().toString());
-//                post.setDescription(mDescription.getText().toString());
-//                post.setPost_id(postId);
-//                post.setPrice(mPrice.getText().toString());
-//                post.setState_province(mStateProvince.getText().toString());
-//                post.setTitle(mTitle.getText().toString());
-//                post.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//
-//                reference.child(getString(R.string.node_post))
-//                        .child(postId)
-//                        .setValue(post);
-//
-//                resetFields();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getActivity(), "could not upload photo", Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//                double currentProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-//                if( currentProgress > (mProgress + 15)){
-//                    mProgress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-//                    Log.d(TAG, "onProgress: upload is " + mProgress + "& done");
-//                    Toast.makeText(getActivity(), mProgress + "%", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
+
     }
     public static byte[] getBytesFromBitmap(Bitmap bitmap, int quality){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

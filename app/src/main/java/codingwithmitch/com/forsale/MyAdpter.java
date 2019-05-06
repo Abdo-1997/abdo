@@ -56,9 +56,12 @@ public class MyAdpter extends RecyclerView.Adapter<MyAdpter.MyViewHolder> {
         holder.email.setText(mPosts.get(position).getPrice());
           url = mPosts.get(position).getImage();
 
-        Picasso.get().load(url).into(holder.image);
-         //UniversalImageLoader.setImage(mPosts.get(position).getImage(), holder.image);
-        //Picasso.get().load(").into(holder.image);
+        // UniversalImageLoader.setImage(mPosts.get(position).getImage(), holder.image);
+        Picasso.get()
+                .load(url)
+                //.resize(170, 150)
+               // .centerCrop()
+                .into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

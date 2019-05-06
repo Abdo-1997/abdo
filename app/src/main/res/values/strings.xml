@@ -8,19 +8,22 @@
     <string name="newpost">new post</string>
     <string name="account">Account</string>
     <string name="name">name</string>
-    <string name="price">price</string>
-
+    <string name="price">price</string>action_share
+    <string name="action_share">Details</string>
 
     <!-- Dialog Names -->
 
 
     <!-- Database nodes -->
     <string name="node_users">users</string>
-    <string name="node_post">post</string>
+    <string name="node_posts">posts</string>
+    <string name="fragment_view_post">post</string>
 
-
+    fragment_view_post
     <!-- Database field names -->
 
+    <!-- Intent extras and Bundle arguments -->
+    <string name="arg_post_id">arg_post_id</string>
 
 
     <!-- Shared Preferenes -->
