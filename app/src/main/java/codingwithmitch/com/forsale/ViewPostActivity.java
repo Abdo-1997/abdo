@@ -19,7 +19,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,6 +63,17 @@ public class ViewPostActivity extends AppCompatActivity {
         mSavePost = (TextView) findViewById(R.id.save_post);
 
         init();
+
+        mSavePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(ViewPostActivity.this, "Saved Is Click", Toast.LENGTH_SHORT).show();
+                FirebaseDatabase.getInstance().getReference().child("Saves").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child(mPostId).setValue(true);
+            }
+        });
+
+
 
         //hideSoftKeyboard();
 

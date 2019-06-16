@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -55,6 +58,7 @@ public class searchfrag extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Post> list;
     MyAdpter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -64,33 +68,21 @@ public class searchfrag extends Fragment {
         mSearchText = (EditText) view.findViewById(R.id.input_search);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
+        list = new ArrayList<Post>();
         adapter = new MyAdpter(getContext(),list);
         recyclerView.setAdapter(adapter);
 
-
-
-        return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        list = new ArrayList<Post>();
-   //     adapter = new MyAdpter(getContext(),list);
-//        recyclerView.setAdapter(adapter);
         reference = FirebaseDatabase.getInstance().getReference().child("post");
         mStorageRef = FirebaseStorage.getInstance().getReference();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<Post>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     Post p = dataSnapshot1.getValue(Post.class);
                     list.add(p);
                 }
-                adapter = new MyAdpter(getContext(),list);
-                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -99,5 +91,52 @@ public class searchfrag extends Fragment {
             }
         });
 
+        mSearchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                search(charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+
+        return view;
+    }
+
+
+
+
+    private void search(String s){
+        Query query = FirebaseDatabase.getInstance().getReference("post").orderByChild("title")
+                .startAt(s)
+                .endAt(s+"\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Post p = snapshot.getValue(Post.class);
+                    list.add(p);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
