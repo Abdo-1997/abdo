@@ -31,6 +31,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="codingwithmitch.com.forsale.EditProfileActivity" />
         <activity
             android:name="codingwithmitch.com.forsale.ViewPostActivity"
             android:label="@string/title_activity_view_post"
@@ -42,6 +43,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name="codingwithmitch.com.forsale.SearchActivity" />
         <activity android:name="codingwithmitch.com.forsale.account.RegisterActivity" />
         <activity android:name="codingwithmitch.com.forsale.fillterActivity" />
